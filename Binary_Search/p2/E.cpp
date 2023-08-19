@@ -1,4 +1,7 @@
 #include <bits/stdc++.h> 
+#include <cmath>
+#include <cstddef>
+#include <iomanip>
 
 using namespace std;
 
@@ -29,7 +32,25 @@ double eps = 1e-12;
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
 
+ld c;
+
+auto good(ld x)->bool{
+	return (pow(x,2.0)) + sqrt(x) >= c;
+}
+
 void solve(){
+	cin >> c;
+	ld l = 0.0,r = 1.0;
+	while(!good(r))r*=2;
+	for(size_t i = 0 ; i < 100 ; i++){
+		ld m = l + (r-l)/2;
+		if (good(m))
+			r = m;
+		else
+			l = m;
+	}
+	cout << setprecision(16) << r << endl;
+		
 }
 int main()
 {

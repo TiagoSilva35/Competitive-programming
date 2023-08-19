@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <bits/stdc++.h> 
 
 using namespace std;
@@ -29,7 +30,52 @@ double eps = 1e-12;
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
 
+int m,n;
+vector<pair<ll,pll>> v;
+vi ans;
+auto good(int x)->bool{
+	ll sum = 0,temp,c;
+	forn(i,n){
+		temp = v[i].first * v[i].second.first + v[i].second.second;
+		c = (x/temp)*v[i].second.first;
+		temp = x%temp;
+		c+= min(v[i].second.first,temp/v[i].first);
+		sum += c;
+		ans[i] = c;
+	}
+	return sum >= m;
+}
 void solve(){
+	cin >> m >> n;
+	v.resize(n);
+	ans.resize(n);
+	forn(i,n){
+		ll t,z,y;
+		cin >> t >> z >> y;
+		v[i] = {t,{z,y}};
+	}
+	if (m == 0){
+		cout << 0 << endl;
+		for(auto j:ans){
+			cout << j << " ";
+		}
+		cout << endl;
+		return;
+	}
+	int l = 0 , r = 1e9;
+	/* while(!good(r))r*=2; */
+	while(r > l + 1){
+		int m = l + (r-l)/2;
+		if (good(m))r = m;
+		else l = m;
+	}
+	cout << r << endl;
+	for(auto i:ans){
+		cout << i << " ";
+	}
+	cout << endl;
+
+	
 }
 int main()
 {

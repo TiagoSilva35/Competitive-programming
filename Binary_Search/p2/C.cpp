@@ -1,6 +1,4 @@
 #include <bits/stdc++.h> 
-#include <cstdlib>
-#include <ostream>
 
 using namespace std;
 
@@ -31,33 +29,34 @@ double eps = 1e-12;
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
 
-ll n,x,y;
-// 3-1 , 0-3 
+int n,x,y;
+
 //receives the time and expects to return whether the nmber of copies is acceptable 
-auto good(ll k)->bool{
-	if (k < min(x,y)){
-		return false;
-	}
+auto good(int k)->bool{
+	if (k < min(x,y))return false;
 	int cnt = 1;
-	k -= min(x,y);	
+	k -= min(x,y);
 	cnt += k/x + k/y;
 	return cnt >= n;
 }
 
 void solve(){
-    cin >> n >> x >> y;
+	cin >> n >> x >> y;
+	int l = 0,r = 1, mid;
+	while(!good(r))r*=2;
+	while(r > l + 1){
+		mid = l + (r-l)/2;
+		if (good(mid)){
+			r = mid;
 
-    int l = 0, r = 1 , mid;
-	while(!good(r)) r*=2;
-    while (l + 1 < r)
-    {
-        mid = l + (r-l)/2;
-        if (good(mid))
-            r = mid;
-        else
-            l = mid;
-    }
-    cout << r << '\n';
+		}
+		else {
+			l = mid;
+		}
+	}
+	cout << r << endl;
+
+	
 }
 int main()
 {
