@@ -1,7 +1,21 @@
-#include <bits/stdc++.h> 
- 
+
+#include <iostream>
+#include <algorithm>
+#include <array>
+#include <bitset>
+#include <cassert>
+#include <chrono>
+#include <cmath>
+#include <cstring>
+#include <functional>
+#include <iomanip>
+#include <map>
+#include <numeric>
+#include <queue>
+#include <random>
+#include <set>
+#include <vector>
 using namespace std;
- 
 typedef long long ll;
 typedef long double ld;
 typedef pair<int,int> pii;
@@ -20,7 +34,6 @@ double eps = 1e-12;
 #define forsn(i,s,e) for(ll i = s; i < e; i++)
 #define rforn(i,s) for(ll i = s; i >= 0; i--)
 #define rforsn(i,s,e) for(ll i = s; i >= e; i--)
-#define ln "\n"
 #define mp make_pair
 #define pb push_back
 #define fi first
@@ -28,44 +41,32 @@ double eps = 1e-12;
 #define INF INT_MAX
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
- 
-ll n,target;	
-vll v;
-
-bool good(ll x){
-	//cout << x << " ";
-	ll sum = 0;
-	forn(i,n){
-		sum += pow((v[i] + 2*x),2);
-	}
-	//cout << sum << endl;
-	return sum >= target;
-}
 
 void solve(){
-	cin >> n >> target;
-	v.resize(n);
+	int n;
+	cin >> n;
+	vi v(n);
 	forn(i,n){cin >> v[i];}
-	ll l = 0, r=1;
-	while(!good(r))r*=2;
-	while(r > l + 1){
-		ll m = l + (r-l)/2;
-		if (good(m)){
-			r = m;
+	int ans = 1;
+	vector<bool> vis(n);
+	forn(i,n){
+		if (!vis[i]){
+			int pos = lower_bound(all(v),v[i])-v.begin();
+	   		if (pos > i && !vis[pos]){
+				vis[pos] = true;
+			}
+			ans++;
 		}
-		else
-			l = m;
 	}
-	cout << r << endl;
-
+	cout << ans << endl;
 }
 int main()
 {
     ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
     ll t = 1;
-    cin >> t;
+    //cin >> t;
     for(int it=1;it<=t;it++) {
-    //cout << "Case #" << it << ": \n";
+        //cout << "Case #" << it+1 << ": ";
         solve();
     }
     return 0;
