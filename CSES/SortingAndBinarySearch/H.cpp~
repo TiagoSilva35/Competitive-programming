@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <algorithm>
 #include <array>
@@ -42,21 +41,21 @@ double eps = 1e-12;
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
 
-int n,x;
+int n;
 
 void solve(){
-	cin >> n >> x;
-	map <int,int> mp;
+	cin >> n;
+	vll v(n);
 	forn(i,n){
-		int a;
-		cin >> a;
-		if (mp.find(x-a) != mp.end()){
-			cout << mp[x-a]  + 1 << " " << i + 1 << endl;
-			return;
-		}
-		mp[a] = i;
+		cin >> v[i];
 	}
-	cout << "IMPOSSIBLE" << endl;
+	vll memo(n);
+	memo[0] = v[0];
+	for(size_t i = 1; i < n ; i++){
+		memo[i] = max(memo[i-1] + v[i],v[i]);
+	}
+	cout << *max_element(all(memo)) << endl;
+
 }
 int main()
 {

@@ -46,37 +46,17 @@ int n,x;
 
 void solve(){
 	cin >> n >> x;
-	vpii v(n);
+	map <int,int> mp;
 	forn(i,n){
-		cin >> v[i].first;
-		v[i].second = i;
-	}
-	sort(all(v));
-	int i = 0,j = n-1;
-	bool flag = false;
-	auto it = max_element(all(v),
-			[](const pii &a,const pii &b){
-				return a.first < b.first;
-			});
-	if((it -> first)*2 < x){
-		cout << "IMPOSSIBLE" << endl;
-		return;
-	}
-	while(i < n){
-		if (i == j){
-			j = n - 1;
-			i++;
-			continue;
+		int a;
+		cin >> a;
+		if (mp.find(x-a) != mp.end()){
+			cout << mp[x-a]  + 1 << " " << i + 1 << endl;
+			return;
 		}
-		}
-		if (v[i].first + v[j].first == x){
-			cout << v[i].second + 1 << " " << v[j].second + 1 << endl;
-			flag = true;
-			break;
-		}
-		else j--;
+		mp[a] = i;
 	}
-	if (!flag) cout << "IMPOSSIBLE" << endl;
+	cout << "IMPOSSIBLE" << endl;
 }
 int main()
 {

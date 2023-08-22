@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <algorithm>
 #include <array>
@@ -42,21 +41,23 @@ double eps = 1e-12;
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
 
-int n,x;
+ll n;
+
+//1 2 2 3 5
 
 void solve(){
-	cin >> n >> x;
-	map <int,int> mp;
-	forn(i,n){
-		int a;
-		cin >> a;
-		if (mp.find(x-a) != mp.end()){
-			cout << mp[x-a]  + 1 << " " << i + 1 << endl;
-			return;
-		}
-		mp[a] = i;
-	}
-	cout << "IMPOSSIBLE" << endl;
+	cin >> n;
+	vll v(n);
+	ll sum = 0;
+	forn(i,n){cin >> v[i];sum+=v[i];}
+	sort(all(v));
+	ll m = v[n/2];
+	ll ans = 0;
+   	forn(i,n){
+		ans += abs(m-v[i]);
+	}	
+	cout << ans << endl;
+	
 }
 int main()
 {
