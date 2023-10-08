@@ -1,7 +1,7 @@
 #include <bits/stdc++.h> 
-
+ 
 using namespace std;
-
+ 
 typedef long long ll;
 typedef long double ld;
 typedef pair<int,int> pii;
@@ -28,17 +28,30 @@ double eps = 1e-12;
 #define INF INT_MAX
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
+ 
 
 void solve(){
+    int n;
+    cin >> n;
+    vi v(n);
+    forn(i,n){cin >> v[i];}
+    auto min = min_element(all(v));
+    int ans = 1;
+    for (auto it = v.begin(); it < v.end(); it++){
+        if (it == min)ans*=(*it)+1;
+        else ans*=(*it);
+
+    }
+    cout << ans << endl;
 }
 int main()
 {
-	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
-	ll t = 1;
-	//cin >> t;
-	for(int it=1;it<=t;it++) {
-	//cout << "Case #" << it+1 << ": ";
-		solve();
-	}
-	return 0;
+    ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
+    ll t = 1;
+    cin >> t;
+    for(int it=1;it<=t;it++) {
+     //cout << "Case #" << it+1 << ": ";
+        solve();
+    }
+    return 0;
 }
