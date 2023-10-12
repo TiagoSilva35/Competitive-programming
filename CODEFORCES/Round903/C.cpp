@@ -29,36 +29,23 @@ double eps = 1e-12;
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
  
-bool ans[26];
 
-void solve() {
-	string s;
-	cin >> s;
-	
-	memset(ans, 0, sizeof(ans));
-	
-	for (int i = 0; i < (int)s.size(); i++) {
-		int j = i;
-		while (j + 1 < (int)s.size() && s[j + 1] == s[i])
-			j++;
-		if ((j - i) % 2 == 0)
-			ans[s[i] - 'a'] = true;
-		i = j;
-	}
-	
-	for (int i = 0; i < 26; i++) if (ans[i])
-		cout << char('a' + i);
-	cout << endl;
+void solve(){
+    int n;
+    cin >> n;
+    vector<string> v;
+    forn(i,n){
+        cin >> v[i];
+    }
 }
-
 int main()
-{
-	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
-	ll t = 1;
-	cin >> t;
-	for(int it=1;it<=t;it++) {
-	 //cout << "Case #" << it+1 << ": ";
-		solve();
-	}
-	return 0;
+
+    ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
+    ll t = 1;
+    cin >> t;
+    for(int it=1;it<=t;it++) {
+     //cout << "Case #" << it+1 << ": ";
+        solve();
+    }
+    return 0;
 }
