@@ -29,11 +29,36 @@ double eps = 1e-12;
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
 
-//    dp[i] = min(dp[i + 1] + 1, bounds(i + a[i] + 1))
-//    print(dp[0])"
+bool good(int x, vll v, int target){
+    int ans = 0;
+    forn(i, (int)v.size()){
+        ans += v[i] > target ? 0 : target - v[i];
+    }
+    return ans > x ? true : false;
+}
+
+void solve(){
+    ll n, x;
+    cin >> n >> x;
+    vll v(n);
+    forn(i,n){cin >> v[i];}
+    sort(all(v));
+    ll lb = 0, rb = 1;
+    while(!good(x, v, rb))rb *= 2;
+    while (rb > lb + 1){
+        ll mb = lb + (rb - lb)/2;
+        if (good(x, v, mb)){
+            rb = mb;
+        }
+        else 
+            lb = mb;
+    }
+    cout << lb << endl;
+
+}
 
 int main()
-
+{
     ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
     ll t = 1;
     cin >> t;

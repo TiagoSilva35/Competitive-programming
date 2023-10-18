@@ -28,18 +28,42 @@ double eps = 1e-12;
 #define INF INT_MAX
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
- 
 
 void solve(){
     int n;
     cin >> n;
-    vector<string> v;
-    forn(i,n){
-        cin >> v[i];
+    vector<vector<char>> matriz(n, vector<char>(n));
+    for (int i = 0; i < n; i++){
+        for (int j = 0; j < n; j++){
+            cin >> matriz[i][j];
+        }
     }
+    
+    int counter = 0;
+    for(int i = 0; i < n; i++){
+        for(int j = 0; j < n; j++){
+            //cout << matriz[i][j] << " " << matriz[n-1-j][i] << " " << abs(matriz[i][j] - matriz[n-1-j][i]) << " " << counter << endl;
+            if (matriz[i][j] != matriz[n-1-j][i]){                
+                int dist = max(max(matriz[i][j], matriz[n-1-j][i]), max(matriz[n-1-i][n-j-1],matriz[j][n-1-i]));
+                counter += abs(dist - matriz[i][j]);
+                matriz[i][j] = dist;
+
+                counter += abs(dist - matriz[n-1-j][i]);
+                matriz[n-1-j][i] = dist;
+
+                counter += abs(dist - matriz[n-i-1][n-j-1]);
+                matriz[n-1-i][n-1-j] = dist; 
+
+                counter += abs(dist - matriz[j][n-i-1]);
+                matriz[j][n-1-i] = dist;
+            }
+        }
+    }
+    cout << counter << endl;
+
 }
 int main()
-
+{
     ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
     ll t = 1;
     cin >> t;

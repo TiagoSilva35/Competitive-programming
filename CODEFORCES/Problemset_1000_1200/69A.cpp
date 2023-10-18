@@ -28,15 +28,26 @@ double eps = 1e-12;
 #define INF INT_MAX
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
+ 
 
-//    dp[i] = min(dp[i + 1] + 1, bounds(i + a[i] + 1))
-//    print(dp[0])"
-
+void solve(){
+    ll n;
+    cin >> n;
+    ll sum_a = 0, sum_b = 0, sum_c = 0;
+    forn(i,n){
+        ll a, b, c;
+        cin >> a >> b >> c;
+        sum_a += a;
+        sum_b += b;
+        sum_c += c;
+    }
+    cout << (sum_a == 0 && sum_b == 0 && sum_c == 0 ? "YES" : "NO") << endl;
+}
 int main()
-
+{
     ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
     ll t = 1;
-    cin >> t;
+    //cin >> t;
     for(int it=1;it<=t;it++) {
      //cout << "Case #" << it+1 << ": ";
         solve();
