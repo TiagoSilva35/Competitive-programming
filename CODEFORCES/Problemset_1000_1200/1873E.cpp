@@ -29,10 +29,12 @@ double eps = 1e-12;
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
 
-bool good(int x, vll v, int target){
-    int ans = 0;
+bool good(ll x, vll v, ll target){
+    ll ans = 0;
+    //cout << target << v[0];
     forn(i, (int)v.size()){
         ans += v[i] > target ? 0 : target - v[i];
+        //cout << ans << endl;
     }
     return ans > x ? true : false;
 }
