@@ -1,5 +1,4 @@
-
-#include <bits/stdc++.h> 
+#include <bits/stdc++.h>
 #include <cctype>
 
 using namespace std;
@@ -23,6 +22,7 @@ double eps = 1e-12;
 #define INF INT_MAX
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
+
 ll dijkstra(vector<vector<pii>> &graph, int source, int target) {
     int n = graph.size();
     ll ans = 0;
@@ -53,7 +53,7 @@ ll dijkstra(vector<vector<pii>> &graph, int source, int target) {
 }
 
 void solve(){
-	int N, M;
+    int N, M;
 	cin >> N >> M;
 	vector<vector<pii>> graph(N + 1,vector<pii>());
 	forn(i,M){
@@ -62,7 +62,6 @@ void solve(){
 		graph[a].push_back(make_pair(b,0));
 	}
 	cout << dijkstra(graph, 0, N-1) <<endl;
-	
 }
 int main()
 {
