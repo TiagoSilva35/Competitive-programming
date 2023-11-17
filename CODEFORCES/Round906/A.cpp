@@ -1,5 +1,7 @@
 
+#include <algorithm>
 #include <bits/stdc++.h> 
+#include <functional>
 
 using namespace std;
 
@@ -11,7 +13,6 @@ typedef vector<ll> vll;
 typedef vector<int> vi;
 typedef vector<pll> vpll;
 typedef vector<pii> vpii;
-typedef vector<vector<ll>> vvll;
 ll MOD = 1000000007;
 double eps = 1e-12;
 #define forn(i,e) for(ll i = 0; i < e; i++)
@@ -23,36 +24,41 @@ double eps = 1e-12;
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
 
-ll n = 0;
-vector<vector<ll>> dp(501,vll(500*501/4 + 501 ,-1));
-
-ll rec(vll &v, ll target, ll sum, vector<bool> &visited, ll idx){
-	if (dp[idx][sum] != -1) return dp[idx][sum];
-	if (sum == target) return 1;
-	if (sum > target || idx >= sz(v)) return 0;
-	dp[idx][sum] = rec(v, target, sum, visited, idx + 1) % MOD + rec(v, target, sum + v[idx], visited, idx + 1) % MOD;
-	return dp[idx][sum];
-}
 void solve(){
+	ll n;
 	cin >> n;
-	vll v(n);
-	ll sum = 0;
+	map<int,int> mp;
+	vi v(n);
 	forn(i,n){
-		v[i] = i + 1;
-		sum += i + 1;
+		int a;
+		cin >> a;
+		v[i] = a;
+		mp[a]++;
 	}
-	if (sum % 2 != 0){
-		cout << 0 << endl;
-		return;
+	if ((int)mp.size() >= 3){
+		cout << "No" << endl;
 	}
-	vector<bool> visited(n,false);
-	cout << rec(v, sum/2, 0, visited, 0)/2 << endl;	
+	else{
+		if ((int)mp.size() == 1){
+			cout << "Yes" << endl;
+		}
+		else{
+			for (auto v : mp){
+				if (v.second == n/2){
+					cout << "Yes" << endl;
+					return;
+				}
+			}
+			cout << "No" << endl;
+		}
+	}
+
 }
 int main()
 {
 	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
 	ll t = 1;
-	//cin >> t;
+	cin >> t;
 	for(int it=1;it<=t;it++) {
 	//cout << "Case #" << it+1 << ": ";
 		solve();

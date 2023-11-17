@@ -11,7 +11,6 @@ typedef vector<ll> vll;
 typedef vector<int> vi;
 typedef vector<pll> vpll;
 typedef vector<pii> vpii;
-typedef vector<vector<ll>> vvll;
 ll MOD = 1000000007;
 double eps = 1e-12;
 #define forn(i,e) for(ll i = 0; i < e; i++)
@@ -23,36 +22,35 @@ double eps = 1e-12;
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
 
-ll n = 0;
-vector<vector<ll>> dp(501,vll(500*501/4 + 501 ,-1));
-
-ll rec(vll &v, ll target, ll sum, vector<bool> &visited, ll idx){
-	if (dp[idx][sum] != -1) return dp[idx][sum];
-	if (sum == target) return 1;
-	if (sum > target || idx >= sz(v)) return 0;
-	dp[idx][sum] = rec(v, target, sum, visited, idx + 1) % MOD + rec(v, target, sum + v[idx], visited, idx + 1) % MOD;
-	return dp[idx][sum];
-}
 void solve(){
+	ll n;
 	cin >> n;
-	vll v(n);
-	ll sum = 0;
-	forn(i,n){
-		v[i] = i + 1;
-		sum += i + 1;
+	ll dif = n % 3;
+	if (dif == 0){
+		if (n - 1 - 4 < 0 || (n - 1 - 4 == 4 || n - 1 - 4 == 1)){
+			cout << "NO" << endl;
+			return;
+		}
+		cout << "YES" << endl;
+		cout << 1 << " " << 4 << " " << n - 1 - 4;
 	}
-	if (sum % 2 != 0){
-		cout << 0 << endl;
-		return;
+	else if (dif == 1 || dif == 2){
+		if (n - 1 - 2 < 0 || (n - 1 - 2 == 2 || n - 1 - 2 == 1)){
+			cout << "NO" << endl;
+			return;
+		}
+		cout << "YES" << endl;
+		cout << 1 << " " << 2 << " " << n - 1 - 2;
 	}
-	vector<bool> visited(n,false);
-	cout << rec(v, sum/2, 0, visited, 0)/2 << endl;	
+	cout << endl;
+
+
 }
 int main()
 {
 	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
 	ll t = 1;
-	//cin >> t;
+	cin >> t;
 	for(int it=1;it<=t;it++) {
 	//cout << "Case #" << it+1 << ": ";
 		solve();
