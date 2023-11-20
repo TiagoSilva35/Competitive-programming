@@ -43,50 +43,39 @@ double eps = 1e-12;
 #define sz(x) ((ll)(x).size())
 
 void solve(){
-	ll n;
+	int n;
 	cin >> n;
-	vll v(n-1);
-	vll ans;
+	vi v(n-1);
+	vi ans(n);
 	forn(i, n-1){
 		cin >> v[i];
 	}
 	bool flag = true;
-	forn(i,n-2){
-		if (v[i] < v[i + 1]){
-			if (flag){
-				ans.pb(v[i] == 0 ? 0 : v[i] - 1);
-				ans.pb(v[i]);
-				flag = false;	
-			}
-			else{
-				ans.pb(v[i]);
-			}
-		}
-		else if (v[i] == v[i + 1]){
-			if(flag){
-				ans.pb(v[i]);
-				ans.pb(v[i] > 0 ? v[i] - 1);
-				i++;
-		
-			}
-			else{
-				ans.pb(v[i]);
-			}
+	int idx = 0;
+	forn(i, n - 2){
+		if (v[i] < v[i+1] && flag){
+			ans[idx++] = max(0, v[i] - 1);
+			ans[idx++] = v[i];
+			flag = false;
 		}
 		else{
-			ans.pb(v[i]);
+			ans[idx++] = v[i];
 		}
 	}
-
-	if (flag && (ll)ans.size() < n){
-		ans.pb(v[n-2] == 0 ? 0 : v[n-2] - 1);
-		ans.pb(v[n-2]);
+	if (v[n-2] < v[n-3]){
+		if (flag && v[n-4] == v[n-3]){
+			ans[n - 2] = max(0, ans[n-2] - 1);
+			ans[n-1] = v[n-2];
+		}
+		else{
+			ans[n-1] = v[n-2];
+			ans[n-2] = max(ans[n-1]-1, 0);
+		}
 	}
 	else{
-		ans.pb(v[n-2]);
+		ans[n-1] = v[n-2];
 	}
-
-
+	
 
 	if ((ll)ans.size() > 0){
 		cout << ans[0];

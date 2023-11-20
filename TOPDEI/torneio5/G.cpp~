@@ -41,56 +41,44 @@ double eps = 1e-12;
 #define INF INT_MAX
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
+vector <vector<ll>>memo(1001,vector<ll>(1001,-1));
 
+ll change(ll idx,ll N, vector <ll> val){
+	if (N == 0){
+		memo[idx][N] = 1;
+		return 1;
+	}
+	if (N < 0 || idx < 0){
+		return 0;
+	}
+	if(memo[idx][N] > -1){
+		return memo[idx][N];
+	}
+	if(val[idx] > N){
+		memo[idx][N] = change(idx-1,N,val);
+	}
+	else
+		memo[idx][N] = change(idx,N-val[idx],val) + change(idx-1,N,val);
+	return memo[idx][N];
+}
 void solve(){
-	int n;
+	ll n;
 	cin >> n;
-	vi v(n-1);
-	vi ans(n);
-	forn(i, n-1){
-		cin >> v[i];
-	}
-	bool flag = true;
-	int idx = 0;
-	forn(i, n - 2){
-		if (v[i] < v[i+1] && flag){
-			ans[idx++] = max(0, v[i] - 1);
-			ans[idx++] = v[i];
-			flag = false;
-		}
-		else{
-			ans[idx++] = v[i];
-		}
-	}
-	if (v[n-2] < v[n-3]){
-		if (flag && v[n-4] == v[n-3]){
-			ans[n - 2] = max(0, ans[n-2] - 1);
-			ans[n-1] = v[n-2];
-		}
-		else{
-			ans[n-1] = v[n-2];
-			ans[n-2] = max(ans[n-1]-1, 0);
-		}
-	}
-	else{
-		ans[n-1] = v[n-2];
-	}
+	ll sum = n*(n+1)/2;
+	vll v(n);
+	iota(all(v), 1);
+	if (sum & 1){
+		cout << 0 << endl;
+		return;
 	
-
-	if ((ll)ans.size() > 0){
-		cout << ans[0];
-		for(int i = 1; i < n; i++){
-			cout << " " << ans[i];
-		}
-		cout << endl;
 	}
-
+	cout << change(n, sum/2, v) << endl;
 }
 int main()
 {
     ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
     ll t = 1;
-   	cin >> t;
+    //cin >> t;
     for(int it=1;it<=t;it++) {
         //cout << "Case #" << it+1 << ": ";
         solve();
