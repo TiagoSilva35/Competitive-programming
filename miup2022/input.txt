@@ -1,10 +1,7 @@
-3
-TAP Vueling Lufthansa
-7
-TAP Porto 21 23:10 faro 22 00:25
-Easyjet Orly 21 14:00 Lisbon 21 15:30
-TAP Lisbon 22 09:00 Faro 22 09:45
-Lufthansa Berlin 21 17:00 Porto 21 20:30
-Vueling Lisbon 23 07:35 Sevilla 23 08:35
-Lufthansa Faro 22 11:10 Munich 22 13:20
-Lufthansa Munich 21 06:55 Stockholm 21 09:03
+10 2 6
+0 0 1 0
+7 0 8 0
+4 0 4 1
+7 1 9 1
+3 1 5 1
+7 0 8 1
