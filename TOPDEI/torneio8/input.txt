@@ -1,0 +1,9 @@
+50
+3
+Nuno 3
+Jose 4
+Francisco 6
+3
+Goncalo 10
+Henrique 1
+Alexandre 6
