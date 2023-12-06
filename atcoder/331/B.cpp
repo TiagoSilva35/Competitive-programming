@@ -29,24 +29,26 @@ double eps = 1e-12;
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
 
-void solve() {
-    ll n, x; cin >> n >> x;
-    vll v(n); forn(i, n) { cin >> v[i]; }
-    vector<ll> dp(x + 1, INF);
-    dp[0] = 0;
+int N;
 
-    for (ll i = 1; i <= x; ++i) {
-        for (ll c : v) {
-            if (i - c >= 0) {
-                dp[i] = min(dp[i], dp[i - c] + 1);
+
+void solve(){
+    //6 8 12
+    int S, M, L;cin >> N >> S >> M >> L;
+    int ans = INF;
+    for(int a=0; a<=100; a++){
+        for(int b=0; b<=100; b++){
+            for(int c=0; c<=100; c++){
+                if(a*6 + b*8 + c*12 >= N){
+                    ans=min(ans, a*S + b*M + c*L);
             }
         }
     }
-
-    cout << (dp[x] != INF ? dp[x] : -1) << endl;
-
+  }
+  cout << ans << endl;
+    
+    
 }
-
 int main()
 {
     ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
