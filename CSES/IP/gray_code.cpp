@@ -28,23 +28,21 @@ double eps = 1e-12;
 #define INF INT_MAX
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
- 
+
+
 
 void solve(){
-    ll x,y;
-    cin >> x >> y;
-    if (!((x+y)%3) && 2*x >= y && 2*y >=x){
-        cout << "YES" << endl;
-        return;
-    }
-    cout << "NO" << endl;
-
+    int n; cin >> n;
+    const size_t z = n;
+    int k = 0;
+    
 }
+
 int main()
 {
     ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
     ll t = 1;
-    cin >> t;
+    //cin >> t;
     for(int it=1;it<=t;it++) {
      //cout << "Case #" << it+1 << ": ";
         solve();

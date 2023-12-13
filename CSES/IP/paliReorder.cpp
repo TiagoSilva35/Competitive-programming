@@ -31,20 +31,46 @@ double eps = 1e-12;
  
 
 void solve(){
-    ll x,y;
-    cin >> x >> y;
-    if (!((x+y)%3) && 2*x >= y && 2*y >=x){
-        cout << "YES" << endl;
+    string s;cin >> s;
+    map<char, int> mp;
+    forn(i, (int)s.size()){
+        mp[s[i]]++;
+    }
+    int imp = 0;
+    for(auto i:mp){
+        if (i.second & 1)imp++;
+    }
+    if (imp > 1){
+        cout << "NO SOLUTION" << endl;
         return;
     }
-    cout << "NO" << endl;
+    string p1 = "";
+    string special = "";
+    for(auto i: mp){
+        if (i.second & 1){
+            forn(k, i.second)
+                special += i.first;
+
+        }
+        else{
+            forn(j, i.second/2){
+                p1 += i.first;
+            }
+        }
+    }
+    string ans = p1;
+    reverse(all(p1));
+    ans += special;
+    ans += p1;
+    cout << ans << endl;
+
 
 }
 int main()
 {
     ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
     ll t = 1;
-    cin >> t;
+    //cin >> t;
     for(int it=1;it<=t;it++) {
      //cout << "Case #" << it+1 << ": ";
         solve();
