@@ -1,4 +1,4 @@
-#include <bits/stdc++.h> 
+#include <bits/stdc++.h>
  
 using namespace std;
  
@@ -31,23 +31,29 @@ double eps = 1e-12;
  
 
 void solve(){
-    string s;
-    cin >> s;
-    string o = "";
-    o += s[0];
-    int idx = 0;
-    for(int i = 1; i < s.size() - 1; i++){
-        if (s[i] == o[idx]){
-            o += s[i + 1];i++;idx++;
+    ll n;
+    cin >> n;
+    vll v(n);
+    forn(i, n){cin >> v[i];}
+    ll temp = 1;
+    ll ans = 0;
+    while(v.size() > 0){
+        ++ans;
+		cout << "here" << endl;
+        for(auto it = v.begin(); it != v.end(); ++it){
+            if (*it == temp){
+                ++temp;
+                v.erase(it);
+            }
         }
     }
-    cout << o << endl;
+    cout << ans << endl;
 }
 int main()
 {
     ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
     ll t = 1;
-    cin >> t;
+    //cin >> t;
     for(int it=1;it<=t;it++) {
      //cout << "Case #" << it+1 << ": ";
         solve();
