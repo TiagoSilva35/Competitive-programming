@@ -29,24 +29,48 @@ double eps = 1e-12;
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
 
-void solve() {
-    ll n, x; cin >> n >> x;
-    vll v(n); forn(i, n) { cin >> v[i]; }
-    vector<ll> dp(x + 1, INF);
-    dp[0] = 0;
+const int mxN = 1e9;
+int n,n1,m1,n2,m2;
+vector<vector<int>>visited(1001, vector<int>(1001,0));
+vector<vector<char>>grid(1001,vector<char>(1001,'a'));
 
-    for (ll i = 1; i <= x; ++i) {
-        for (ll c : v) {
-            if (i - c >= 0) {
-                dp[i] = min(dp[i], dp[i - c] + 1);
-            }
+const int di[] = {1, 0, -1, 0};
+const int dj[] = {0, -1, 0, 1};
+
+bool valid(int i, int j){
+    return i >= n1 && j >= n2 && i <= m1 && j <= m2;
+}
+int ans = 0;
+void dfs(int i, int j){
+    visited[i][j] = 1;
+    for(int k = 0; k < 4; ++k){
+        int ni = i + di[k], nj = j + dj[k];
+        if (valid(ni, nj) && !visited[ni][nj]){
+            ans = grid[ni][nj] == 'B' ? ans : ans + 1;  
+            dfs(ni,nj);  
         }
     }
-
-    cout << (dp[x] != INF ? dp[x] : -1) << endl;
-
 }
 
+void solve(){
+    cin >> n;
+    int q;
+    cin >> q;
+    forn(i,n){
+        forn(j,n){
+            char a;cin >> a;
+            grid[i][j] = a;
+        }
+    }
+    for (int i = 0; i < q; ++i){
+        ans = 0;
+        int x1, y1, x2, y2;
+        cin >> x1 >> y1 >> x2 >> y2;
+        n1 = x1, n2 = y1, m1 = x2, m2 = y2;
+        dfs(x1,y1);
+        cout << ans << endl; 
+    }
+}
 int main()
 {
     ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);

@@ -33,7 +33,12 @@ double eps = 1e-12;
 void solve(){
     ll x,y;
     cin >> x >> y;
-    
+    if (!((x+y)%3) && 2*x >= y && 2*y >=x){
+        cout << "YES" << endl;
+        return;
+    }
+    cout << "NO" << endl;
+
 }
 int main()
 {

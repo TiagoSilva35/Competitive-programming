@@ -28,25 +28,44 @@ double eps = 1e-12;
 #define INF INT_MAX
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
+ 
 
-void solve() {
-    ll n, x; cin >> n >> x;
-    vll v(n); forn(i, n) { cin >> v[i]; }
-    vector<ll> dp(x + 1, INF);
-    dp[0] = 0;
+void solve(){
+    string s;cin >> s;
+    map<char, int> mp;
+    forn(i, (int)s.size()){
+        mp[s[i]]++;
+    }
+    int imp = 0;
+    for(auto i:mp){
+        if (i.second & 1)imp++;
+    }
+    if (imp > 1){
+        cout << "NO SOLUTION" << endl;
+        return;
+    }
+    string p1 = "";
+    string special = "";
+    for(auto i: mp){
+        if (i.second & 1){
+            forn(k, i.second)
+                special += i.first;
 
-    for (ll i = 1; i <= x; ++i) {
-        for (ll c : v) {
-            if (i - c >= 0) {
-                dp[i] = min(dp[i], dp[i - c] + 1);
+        }
+        else{
+            forn(j, i.second/2){
+                p1 += i.first;
             }
         }
     }
+    string ans = p1;
+    reverse(all(p1));
+    ans += special;
+    ans += p1;
+    cout << ans << endl;
 
-    cout << (dp[x] != INF ? dp[x] : -1) << endl;
 
 }
-
 int main()
 {
     ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);

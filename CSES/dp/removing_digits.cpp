@@ -29,22 +29,21 @@ double eps = 1e-12;
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
 
-void solve() {
-    ll n, x; cin >> n >> x;
-    vll v(n); forn(i, n) { cin >> v[i]; }
-    vector<ll> dp(x + 1, INF);
-    dp[0] = 0;
+const int mxN = 1e6;
+int dp[mxN + 1];
+int n; 
 
-    for (ll i = 1; i <= x; ++i) {
-        for (ll c : v) {
-            if (i - c >= 0) {
-                dp[i] = min(dp[i], dp[i - c] + 1);
-            }
+void solve(){
+    cin >> n;
+    for (int i = 1; i <= n ; ++i){
+        dp[i] = 1e9;
+        int j = i;
+        while(j){
+            dp[i] = min(dp[i], dp[i - j % 10] + 1);
+            j /= 10;
         }
     }
-
-    cout << (dp[x] != INF ? dp[x] : -1) << endl;
-
+    cout << dp[n] << endl;
 }
 
 int main()
