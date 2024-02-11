@@ -1,0 +1,96 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+typedef long long ll;
+typedef long double ld;
+typedef pair<int,int> pii;
+typedef pair<ll,ll> pll;
+typedef pair<double,double> pdd;
+typedef vector<ll> vll;
+typedef vector<int> vi;
+typedef vector<vector<int> > vv;
+typedef vector<vector<ll> > vvll;
+typedef vector<vector<pii> > vvpii;
+typedef vector<pll> vpll;
+typedef vector<pii> vpii;
+double eps = 1e-12;
+#define all(x) (x).begin(), (x).end()
+#define sz(x) ((ll)(x).size())
+int n;
+int dijkstra(vector<string>& grid, pii start, pii end) {
+    int rows = grid.size();
+    int cols = grid[0].size();
+    vector<pii> directions = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+    
+    auto isValid = [&](int x, int y) {
+        return x >= 0 && x < rows && y >= 0 && y < cols && grid[x][y] != '#';
+    };
+    
+    vector<vector<int>> distances(rows, vector<int>(cols, INT_MAX));
+    distances[start.first][start.second] = 0;
+    
+    priority_queue<pair<int, pii>, vector<pair<int, pii>>, greater<pair<int, pii>>> pq;
+    pq.push({0, start});
+    
+    while (!pq.empty()) {
+        int currentDistance = pq.top().first;
+        pii currentCell = pq.top().second;
+        pq.pop();
+        cout << "here" << endl;
+        if (currentCell == end) {
+            return distances[end.first][end.second];
+        }
+        
+        for (auto& direction : directions) {
+            int newX = currentCell.first + direction.first;
+            int newY = currentCell.second + direction.second;
+            
+            if (isValid(newX, newY)) {
+                int distance = currentDistance + 1; 
+                
+                if (distance < distances[newX][newY]) {
+                    distances[newX][newY] = distance;
+                    pq.push({distance, {newX, newY}});
+                }
+            }
+        }
+    }
+    
+    return -1;  // If no path is found
+}
+
+
+void solve(){
+  int n;
+  cin >> n;
+  pii s, t;
+  bool bs = false;
+  vector<string> v(n);
+  for (int i = 0; i < n; ++i){
+    cin >> v[i];
+    for (int j = 0;  j < n; ++j){
+      if (v[i][j] == 'P'){
+	if (!bs){
+	  bs = true;
+	  s = {i, j};
+	}
+	else{
+      	  t = {i, j};
+	}
+      }
+    }
+  }
+  cout << dijkstra(v,s, t) << endl;
+}
+int main()
+{
+  ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
+  ll t = 1;
+  //cin >> t;
+  for(int it=1;it<=t;it++) {
+    //cout << "Case #" << it+1 << ": ";
+    solve();
+  }
+  return 0;
+}
