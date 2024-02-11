@@ -1,7 +1,22 @@
-#include <bits/stdc++.h> 
- 
+
+#include <iostream>
+#include <algorithm>
+#include <array>
+#include <bitset>
+#include <cassert>
+#include <chrono>
+#include <cmath>
+#include <cstring>
+#include <functional>
+#include <iomanip>
+#include <map>
+#include <numeric>
+#include <queue>
+#include <random>
+#include <set>
+#include <vector>
+#include <unordered_set>
 using namespace std;
- 
 typedef long long ll;
 typedef long double ld;
 typedef pair<int,int> pii;
@@ -20,7 +35,6 @@ double eps = 1e-12;
 #define forsn(i,s,e) for(ll i = s; i < e; i++)
 #define rforn(i,s) for(ll i = s; i >= 0; i--)
 #define rforsn(i,s,e) for(ll i = s; i >= e; i--)
-#define ln "\n"
 #define mp make_pair
 #define pb push_back
 #define fi first
@@ -28,36 +42,35 @@ double eps = 1e-12;
 #define INF INT_MAX
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
- 
-const int mxX = 1e6, M = 1e9 +7;
-ll n,x;
-ll c[101];
-ll dp[mxX + 10];
- 
+
 void solve(){
-    cin >> n >> x;
-    forn(i, n){
-        cin >> c[i];
-    }
-    dp[0] = 1;
-    for(int i = 1; i <= x; i++){
-        for(int j = 0; j < n; j++){
-            //dp[i] = dp[i-1];
-            if (c[j] <= i){
-                dp[i] = (dp[i] + dp[i-c[j]])%M;
-            }
-        }
-    }
-    cout << dp[x] << endl;
+	ll n;cin >> n;string s;cin >> s;
+	string a = "";
+	unordered_set<char> S;
+	bool flag = false;
+	for (auto &i: s){
+		if (!flag){
+			flag = a.find(i) != string::npos ? true : false;
+			if (!flag){
+				a+=i;
+			}
+			else{
+				S.insert(i);
+			}
+			continue;
+		}
+		S.insert(i);
+	}
+
+	cout << (ll)a.size() + (ll)S.size() << endl;
 }
- 
 int main()
 {
     ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
     ll t = 1;
-    //cin >> t;
+    cin >> t;
     for(int it=1;it<=t;it++) {
-     //cout << "Case #" << it+1 << ": ";
+        //cout << "Case #" << it+1 << ": ";
         solve();
     }
     return 0;

@@ -34,10 +34,14 @@ void solve(){
     string s;
     cin >> s;
     string o = "";
-    for(auto c: s){
-        o += c;
-        if (o[] == )
+    o += s[0];
+    int idx = 0;
+    for(int i = 1; i < s.size() - 1; i++){
+        if (s[i] == o[idx]){
+            o += s[i + 1];i++;idx++;
+        }
     }
+    cout << o << endl;
 }
 int main()
 {

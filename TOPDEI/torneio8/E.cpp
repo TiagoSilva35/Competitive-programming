@@ -1,4 +1,4 @@
-#include <bits/stdc++.h> 
+#include <bits/stdc++.h>
  
 using namespace std;
  
@@ -35,20 +35,19 @@ void solve(){
     cin >> n;
     vll v(n);
     forn(i, n){cin >> v[i];}
-    vll dp(n, 0);
-    dp[0] = 1;
-    ll moves = 0;
-    for (int i = 1; i < n; i++){
-        moves = 1;
-        if (v[i] < v[i - 1]){
-            dp[i] = max(dp[i-1],dp[i-1] + 1);
-        }
-        else{
-            dp[i] = 1;
+    ll temp = 1;
+    ll ans = 0;
+    while(v.size() > 0){
+        ++ans;
+        for(auto it = v.begin(); it != v.end(); ++it){
+            if (*it == temp){
+                ++temp;
+                v.erase(it);
+				it--;
+            }
         }
     }
-    ll ans = *max_element(all(dp));
-    cout << (moves == 0 ? 0 : (n - ans))  << endl;
+    cout << ans << endl;
 }
 int main()
 {

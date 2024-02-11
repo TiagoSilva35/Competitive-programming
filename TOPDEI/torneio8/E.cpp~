@@ -1,4 +1,4 @@
-#include <bits/stdc++.h> 
+#include <bits/stdc++.h>
  
 using namespace std;
  
@@ -29,28 +29,26 @@ double eps = 1e-12;
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
  
-const int mxX = 1e6, M = 1e9 +7;
-ll n,x;
-ll c[101];
-ll dp[mxX + 10];
- 
+
 void solve(){
-    cin >> n >> x;
-    forn(i, n){
-        cin >> c[i];
-    }
-    dp[0] = 1;
-    for(int i = 1; i <= x; i++){
-        for(int j = 0; j < n; j++){
-            //dp[i] = dp[i-1];
-            if (c[j] <= i){
-                dp[i] = (dp[i] + dp[i-c[j]])%M;
+    ll n;
+    cin >> n;
+    vll v(n);
+    forn(i, n){cin >> v[i];}
+    ll temp = 1;
+    ll ans = 0;
+    while(v.size() > 0){
+        ++ans;
+		cout << "here" << endl;
+        for(auto it = v.begin(); it != v.end(); ++it){
+            if (*it == temp){
+                ++temp;
+                v.erase(it);
             }
         }
     }
-    cout << dp[x] << endl;
+    cout << ans << endl;
 }
- 
 int main()
 {
     ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
