@@ -24,13 +24,13 @@ bool DFS(vector<bool>&check,vector<vector<int>> &adj,vi &parent,int v,int p){
             return true;
         }
         if (!check[i])
-            if (DFS(check,adj,parent,i,v))
+            if (DFS(check,adj,parent,i))
                 return true;
     }
     return false;
 }
 
-bool visit_all(int n,vector<bool>&check,vector<vector<int>> &adj,vi &parent,int p){
+bool visit_all(int n,vector<bool>&check,vector<vector<int>> &adj,vi &parent){
     for(int i = 1; i <= n ; i++){
         if (!check[i]){
             if (DFS(check,adj,parent,i,-1)) return true;
@@ -50,7 +50,6 @@ void solve() {
         int a, b;
         cin >> a >> b;
         adj[a].push_back(b);
-        adj[b].push_back(a);
     }
     parent[1] = -1;
     if(visit_all(n,check, adj, parent,-1)){

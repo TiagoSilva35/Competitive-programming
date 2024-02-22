@@ -28,48 +28,33 @@ double eps = 1e-12;
 #define INF 2e18
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
-#define lli long long int
-
-vvll memo(7,vll(1000001,-1));
-
-lli rec(int n, int cur_sum, int idx, vi v) {
+ 
+vv memo(7,vi(1000001,-1));
+ 
+int rec(int n, int cur_sum, int idx, vi &v) {
     if (memo[idx][cur_sum] != -1)
         return memo[idx][cur_sum];
+ 
     if (cur_sum == n)
         return 1;
     if (idx == 6 || cur_sum > n)
         return 0;
-
-    lli ways = 0;
+ 
+    int ways = 0;
     for (int i = 0; i < 6; i++) {
         ways += rec(n, cur_sum + v[i], i, v);
         ways %= MOD;
     }
-
+ 
     memo[idx][cur_sum] = ways;
     return ways;
 }
-
+ 
 void solve(){
     int n;
     cin >> n;
     vi v = {1,2,3,4,5,6};
-    vi dp(n+1,0);
-    dp[0] = 1;
-    for (int i = 1; i <= n; i++)
-    {
-        for (int j = 1; j <= 6; j++)
-        {
-            if(i-j >= 0){
-                dp[i] += dp[i-j];
-                //cout << i << " " << dp[i-j] << ln;
-                dp[i]%=MOD;
-            }
-        }
-        
-    }
-    cout << dp[n] << endl;
-    
+    cout << rec(n,0,0,v) << endl;
 }
 int main()
 {
